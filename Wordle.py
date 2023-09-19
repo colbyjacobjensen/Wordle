@@ -39,7 +39,7 @@ def wordle():
         if word not in FIVE_LETTER_WORDS:
             gw.show_message("Not in word list")
         else:
-            gw.show_message(word.upper())
+            gw.show_message("In word list")
 
     gw.add_enter_listener(enter_action)
     
