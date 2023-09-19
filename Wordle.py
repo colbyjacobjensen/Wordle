@@ -11,32 +11,39 @@ from WordleDictionary import FIVE_LETTER_WORDS
 from WordleGraphics import WordleGWindow, N_COLS, N_ROWS
 
 def wordle():
-    correct_word = random.choice(FIVE_LETTER_WORDS) # Selects random word from WordleDictionary
-    # letters = []  # Create an empty list to store the letters
-    userGuess = []
     gw = WordleGWindow()
-
+    correct_word = random.choice(FIVE_LETTER_WORDS) # Selects random word from WordleDictionary
+    letters = []  # Creates an empty list to store the letters of the correct word
+    
     # Loop to add letters from correct_word to list
     for letter in correct_word:
         letters.append(letter)
 
-    letters = [letter.upper() for letter in letters]
+    letters = [letter.upper() for letter in letters] # Capitalizes letters in array
 
-    while userGuess not in FIVE_LETTER_WORDS:
-        gw.add_enter_listener()
-        gw.show_message("Not in word list.")
-
-    # Milestone 1
+    # Milestone 1 (Complete)
     # for r in range(N_ROWS): 
     #     for c in range(N_COLS):
-    #         gw.set_square_letter(r, c, letters[c])
-    #         gw.get_square_letter(r,c)
+    #         gw.set_square_letter(0, c, letters[c])
+    #         gw.get_square_letter(0,c)
 
     def enter_action(s):
-        gw.show_message(letters)
+        userGuess=[]
+
+        for c in range(N_COLS):
+            userGuess.append(gw.get_square_letter(0,c)) 
+
+        userGuess = [letter.lower() for letter in userGuess]
+        word = ''.join(userGuess)
+
+        if word not in FIVE_LETTER_WORDS:
+            gw.show_message("Not in word list")
+        else:
+            gw.show_message(word.upper())
 
     gw.add_enter_listener(enter_action)
-
+    
+    
 # Startup code
 
 if __name__ == "__main__":
